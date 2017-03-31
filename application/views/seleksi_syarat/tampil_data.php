@@ -22,12 +22,14 @@
         <th>Gap Pangkat</th>
         <th>Gap Pendidikan</th>
         <th>Gap</th>
+        <th>Status</th>
 
     </tr>
     </thead>
     <tbody>
     <?php
     $no=1;
+    $status="";
     if(isset($data_seleksi_syarat)){
         foreach($data_seleksi_syarat as $row){
             ?>
@@ -35,20 +37,36 @@
                 <td><?php echo $no++; ?></td>
                 <td><?php echo $row->id_seleksi_syarat; ?></td>
                 <td><?php echo $row->id_pegawai?></td>
-                 <td><?php echo $row->nama?></td>
+                <td><?php echo $row->nama?></td>
                 <td><?php echo $row->nilai_pangkat_pegawai ?></td>
                 <td><?php echo $row->nilai_pendidikan_pegawai?></td>
-                  <td><?php echo $row->id_jabatankosong?></td>
+                <td><?php echo $row->id_jabatankosong?></td>
                 <td><?php echo $row->nilai_pangkat_jabatan ?></td>
                 <td><?php echo $row->nilai_pendidikan_jabatan?></td>
                 <td><?php echo $row->gap_pangkat?></td>
                 <td><?php echo $row->gap_pendidikan ?></td>
                 <td><?php echo $row->gap?></td>
-            
+                <td>
+                <?php
+                     if ($row->gap==0) {
+                        # code...
+                        $status="Lulus";
+                        echo $status;
+                    }
+                    else{
+                        $status="Tidak Lulus";
+                        echo $status;
+                    }
 
+                    //update ke tabel hasil
+                    $data=array(
+                        ''
+                        )
+                ?>
+                </td>
             </tr>
-
-        <?php }
+        <?php 
+        }
     }
     ?>
 

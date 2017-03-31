@@ -4,7 +4,7 @@ class seleksi_syarat extends CI_Controller
 {
     function __construct() {
         parent::__construct();
-        $this->load->model(array('model_pegawai','model_seleksi_syarat'));
+        $this->load->model(array('model_app','model_pegawai','model_seleksi_syarat'));
         check_session();
     }
     
