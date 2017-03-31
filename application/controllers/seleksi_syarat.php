@@ -10,6 +10,25 @@ class seleksi_syarat extends CI_Controller
     
     function index(){
         
+        $data=array(
+            
+            'data_jabatan_kosong'=>$this->model_app->getAllData('jabatan_kosong'),
+            'data_jabatan_kosong'=>$this->model_app->jabatan_kosong(),
+            'data_jabatan'=>$this->model_app->getAllData('jabatan'),
+            'data_tingkat_jabatan'=>$this->model_app->getAllData('tingkat_jabatan'),
+            'data_unitkerja'=>$this->model_app->getAllData('unitkerja'),
+            'data_profil_syarat_jabatan'=>$this->model_app->profil_syarat_jabatan('profil_syarat_jabatan'),
+            'data_bobot_rj_jabatan'=>$this->model_app->bobot_rj_jabatan('bobot_rj_jabatan'),
+            'data_bobot_per_jabatan'=>$this->model_app->bobot_per_jabatan('bobot_per_jabatan'),
+            'data_bobot_km_jabatan'=>$this->model_app->bobot_km_jabatan('bobot_km_jabatan'),
+            'data_pangkat'=>$this->model_app->getAllData('pangkat'),
+            'data_pendidikan'=>$this->model_app->getAllData('pendidikan'),
+            'data_seleksi_syarat'=>$this->model_seleksi_syarat->seleksi_syarat(),
+        );
+
+        $this->template->load('template','seleksi_syarat/tampil_data',$data);
+        
+        
     }
 
     function tampil_data(){
@@ -22,5 +41,7 @@ class seleksi_syarat extends CI_Controller
 
     		$this->model_seleksi_syarat->insert($data);
     	}
+        
+        redirect('seleksi_syarat','refresh');
     }
 }
