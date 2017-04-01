@@ -32,16 +32,29 @@ class seleksi_syarat extends CI_Controller
     }
 
     function tampil_data(){
-    	
-    	$pegawai=$this->model_pegawai->select_all_pegawai();
-    	foreach ($pegawai->result() as $pegawai_param) {
-    		# code...
-    		$data['id_pegawai']=$pegawai_param->id_pegawai;
-    		$data['id_jabatankosong']=$this->uri->segment(3);
-
-    		$this->model_seleksi_syarat->insert($data);
-    	}
-        
-        redirect('seleksi_syarat','refresh');
+    		$this->model_seleksi_syarat->delete_seleksi_syarat($this->uri->segment(3));
+    		$id_jabatankosong=$this->uri->segment(3);
+    		$pegawai=$this->model_seleksi_syarat->seleksi_syarat();
+    		$status="";
+	    	foreach ($pegawai as $pegawai_item) {
+	    		# code...
+	    		if ($pegawai_item->gap >= -2) {
+	    			# code...
+	    			$status="lulus";
+	    		}
+	    		else{
+	    			$status="tidak lulus";
+	    		}
+	    		$data['id_pegawai']=$pegawai_item->id_pegawai;
+	    		$data['id_jabatankosong']=$id_jabatankosong;
+	    		$data['gap_pendidikan']=$pegawai_item->gap_pendidikan;
+	    		$data['gap_pangkat']=$pegawai_item->gap_pangkat;
+	    		$data['gap']=$pegawai_item->gap;
+	    		$data['status']=$status;
+	    		$this->model_seleksi_syarat->proses_seleksi_syarat($data);
+	    	}
+	    	
+	    	$data['pegawai_lulus']=$this->model_seleksi_syarat->hasil_seleksi_syarat();
+	    	$this->template->load('template','seleksi_syarat/tampil_data_lulus',$data);
     }
 }

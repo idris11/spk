@@ -48,20 +48,46 @@
                 <td><?php echo $row->gap?></td>
                 <td>
                 <?php
-                     if ($row->gap==0) {
-                        # code...
-                        $status="Lulus";
-                        echo $status;
+                     switch ($row->gap) {
+                         case '-3':
+                             # code...
+                             echo "Memenuhi Syarat Kekurangan 3 Tingkat";
+                             break;
+                         case '-2':
+                             # code...
+                             echo "Memenuhi Syarat Kekurangan 2 Tingkat";
+                             break;
+                         case '-1':
+                             # code...
+                             echo "Memenuhi Syarat Kekurangan 1 Tingkat";
+                             break;
+                         case '0':
+                             # code...
+                             echo "Memenuhi Syarat Minimal";
+                             break;
+                         case '1':
+                             # code...
+                             echo "Memenuhi Syarat Kelebihan 1 Tingkat";
+                             break;
+                         case '2':
+                             # code...
+                             echo "Memenuhi Syarat Kelebihan 2 Tingkat";
+                             break;
+                         case '3':
+                             # code...
+                             echo "Memenuhi Syarat Kelebihan 3 Tingkat";
+                             break;
+                         case '4':
+                             # code...
+                             $status="Memenuhi Syarat Kelebihan 4 Tingkat";
+                             echo $status;
+                             break;
+                         default:
+                             # code...
+                             $status="Tidak Memenuhi Syarat";
+                             echo $status;
+                             break;
                     }
-                    else{
-                        $status="Tidak Lulus";
-                        echo $status;
-                    }
-
-                    //update ke tabel hasil
-                    $data=array(
-                        ''
-                        )
                 ?>
                 </td>
             </tr>
