@@ -32,7 +32,10 @@ class seleksi_syarat extends CI_Controller
     }
 
     function tampil_data(){
+    		//menghapus data yg pernah diisi sebelumnya yg id_jabatankosong sama
     		$this->model_seleksi_syarat->delete_seleksi_syarat($this->uri->segment(3));
+    		
+    		//proses seleksi pegawai yg lulus
     		$id_jabatankosong=$this->uri->segment(3);
     		$pegawai=$this->model_seleksi_syarat->seleksi_syarat();
     		$status="";
@@ -53,7 +56,8 @@ class seleksi_syarat extends CI_Controller
 	    		$data['status']=$status;
 	    		$this->model_seleksi_syarat->proses_seleksi_syarat($data);
 	    	}
-	    	
+
+	    	//menampilkan pegawai yg lulus seleksi
 	    	$data['pegawai_lulus']=$this->model_seleksi_syarat->hasil_seleksi_syarat();
 	    	$this->template->load('template','seleksi_syarat/tampil_data_lulus',$data);
     }
