@@ -37,7 +37,7 @@ class seleksi_syarat extends CI_Controller
     		
     		//proses seleksi pegawai yg lulus
     		$id_jabatankosong=$this->uri->segment(3);
-    		$pegawai=$this->model_seleksi_syarat->seleksi_syarat();
+    		$pegawai=$this->model_seleksi_syarat->seleksi_syarat($id_jabatankosong);
     		$status="";
 	    	foreach ($pegawai as $pegawai_item) {
 	    		# code...
