@@ -33,7 +33,7 @@ class seleksi_syarat extends CI_Controller
 
     function tampil_data(){
     		//menghapus data yg pernah diisi sebelumnya yg id_jabatankosong sama
-    		$this->model_seleksi_syarat->delete_seleksi_syarat($this->uri->segment(3));
+    		$this->model_seleksi_syarat->delete_seleksi_syarat();
     		
     		//proses seleksi pegawai yg lulus
     		$id_jabatankosong=$this->uri->segment(3);
@@ -54,7 +54,8 @@ class seleksi_syarat extends CI_Controller
 	    		$data['gap_pangkat']=$pegawai_item->gap_pangkat;
 	    		$data['gap']=$pegawai_item->gap;
 	    		$data['status']=$status;
-	    		$this->model_seleksi_syarat->proses_seleksi_syarat($data);
+	    		
+                $this->model_seleksi_syarat->proses_seleksi_syarat($data);
 	    	}
 
 	    	//menampilkan pegawai yg lulus seleksi

@@ -13,7 +13,7 @@ class model_seleksi_syarat extends ci_model{
 (select gap_pangkat + gap_pendidikan) as gap
 			from jabatan_kosong join profil_syarat_jabatan
               on jabatan_kosong.id_jabatankosong=profil_syarat_jabatan.id_jabatankosong join pegawai join profil_syarat_pegawai 
-              on pegawai.id_pegawai=profil_syarat_pegawai.id_pegawai")->result();
+              on pegawai.id_pegawai=profil_syarat_pegawai.id_pegawai group by pegawai.id_pegawai")->result();
     }
 
     function insert_hasil_seleksi_syarat($data){
@@ -29,9 +29,9 @@ class model_seleksi_syarat extends ci_model{
     	$this->db->delete('hasil_seleksi_syarat');
     }
 
-    function delete_seleksi_syarat($id_jabatankosong){
-    	$this->db->where('id_jabatankosong',$id_jabatankosong);
-    	$this->db->delete('seleksi_syarat');
+    function delete_seleksi_syarat(){
+    	$this->db->from('seleksi_syarat');
+        $this->db->truncate();
     }
 
     function hasil_seleksi_syarat(){
